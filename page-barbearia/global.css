@@ -1,0 +1,348 @@
+/* index.css */
+/* Efeitos e animações fluidas para o carrossel */
+:root {
+  --x: 0px;
+  --y: 0px;
+  --slide-transition-duration: 0.8s;
+  --content-transition-duration: 0.6s;
+  --easing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Ajuste para o parallax: mais suave */
+.slide-transform {
+  transform: translate3d(var(--x), var(--y), 0); /* Removida a divisão extra */
+  transition: transform 0.15s ease-out; /* Aumentado para 0.15s e easing */
+  will-change: transform;
+}
+
+.perspective-container {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.slide-inactive {
+  transform: scale(0.95) rotateX(5deg) translateY(5%);
+  transform-origin: bottom;
+  filter: brightness(0.7);
+  z-index: 1;
+}
+
+.slide-active {
+  transform: scale(1) rotateX(0deg) translateY(0);
+  transform-origin: bottom;
+  filter: brightness(1);
+  z-index: 2;
+}
+
+.carousel-transition {
+  transition: transform var(--slide-transition-duration) var(--easing), filter var(--slide-transition-duration)
+    var(--easing), z-index 0.1s linear; /* z-index não transiciona, mas a propriedade é válida */
+  will-change: transform, filter;
+}
+
+.slide-container-transition {
+  transition: all 0.15s ease-out;
+  will-change: transform;
+}
+
+.opacity-transition {
+  transition: opacity var(--content-transition-duration) var(--easing), visibility var(--content-transition-duration)
+    var(--easing);
+}
+
+.bg-transition {
+  transition: all var(--content-transition-duration) var(--easing);
+}
+
+.button-transition {
+  transition: all 0.3s var(--easing);
+}
+
+.carousel-list-transition {
+  transition: transform var(--slide-transition-duration) var(--easing);
+}
+
+/* Efeito de brilho suave no slide ativo */
+.slide-active .slide-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0) 20%,
+    rgba(0, 0, 0, 0) 80%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+}
+
+/* Melhorias na tipografia */
+.slide-content h2 {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+.slide-content p {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* index.css - Custom scrollbar */
+html {
+  scroll-behavior: smooth;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c0c0c0; /* primary-bronze (prata) */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #808080; /* primary-forest (prata escuro) */
+}
+
+/* Mobile menu styles */
+.mobile-menu {
+  transform: translateX(100%);
+  transition: transform 0.3s ease-out;
+}
+.mobile-menu.open {
+  transform: translateX(0);
+}
+
+
+/* Agendamento.css */
+html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            overflow-x: hidden;
+            padding-bottom: 80px; /* Espaço para os botões flutuantes */
+        }
+
+        .animate-glow {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #C0C0C0;
+            /* primary-bronze (prata) */
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #808080;
+            /* primary-forest (prata escuro) */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            .service-card {
+                padding: 1rem !important;
+            }
+
+            .barber-card {
+                padding: 1.5rem !important;
+            }
+
+            .time-slot {
+                height: 3.5rem !important;
+                font-size: 0.875rem !important;
+            }
+
+            .date-btn {
+                height: 4.5rem !important;
+                font-size: 0.875rem !important;
+            }
+        }
+
+/* Botões flutuantes abaixo de tudo */
+.floating-buttons-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.95);
+    backdrop-filter: blur(5px);
+    border-top: 1px solid rgba(192,192,192,0.2);
+    z-index: 100;
+    padding: 1rem 0;
+    transition: transform 0.3s ease;
+}
+
+/* Esconde os botões quando não são necessários */
+.floating-buttons-container.hidden {
+    transform: translateY(100%);
+}
+
+/* Ajuste para telas grandes */
+@media (min-width: 1024px) {
+    .floating-buttons-container {
+        background: rgba(0,0,0,0.85);
+    }
+}
+
+/* Remove qualquer padding-bottom do main-content */
+.main-content {
+    padding-bottom: 0;
+}
+
+/* nossos serviços */
+  :root {
+            --x: 0px;
+            --y: 0px;
+        }
+        
+        .slide-transform {
+            transform: translate3d(calc(var(--x) / 30), calc(var(--y) / 30), 0);
+        }
+        
+        .perspective-container {
+            perspective: 1200px;
+            transform-style: preserve-3d;
+        }
+        
+        .slide-inactive {
+            transform: scale(0.98) rotateX(8deg);
+            transform-origin: bottom;
+        }
+        
+        .slide-active {
+            transform: scale(1) rotateX(0deg);
+            transform-origin: bottom;
+        }
+        
+        .carousel-transition {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .slide-container-transition {
+            transition: all 0.15s ease-out;
+        }
+        
+        .opacity-transition {
+            transition: opacity 1s ease-in-out;
+        }
+        
+        .bg-transition {
+            transition: all 1s;
+        }
+        
+        .button-transition {
+            transition: all 0.2s;
+        }
+        
+        .carousel-list-transition {
+            transition: transform 1s ease-in-out;
+        }
+
+        
+        /* nossos serviços */
+/* Efeitos e animações fluidas para o carrossel */
+:root {
+    --x: 0px;
+    --y: 0px;
+    --slide-transition-duration: 0.8s;
+    --content-transition-duration: 0.6s;
+    --easing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.slide-transform {
+    transform: translate3d(calc(var(--x) / 20), calc(var(--y) / 20), 0);
+    transition: transform 0.1s linear;
+}
+
+.perspective-container {
+    perspective: 1200px;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.slide-inactive {
+    transform: scale(0.95) rotateX(5deg) translateY(5%);
+    transform-origin: bottom;
+    filter: brightness(0.7);
+    z-index: 1;
+}
+
+.slide-active {
+    transform: scale(1) rotateX(0deg) translateY(0);
+    transform-origin: bottom;
+    filter: brightness(1);
+    z-index: 2;
+}
+
+.carousel-transition {
+    transition: transform var(--slide-transition-duration) var(--easing), 
+                filter var(--slide-transition-duration) var(--easing),
+                z-index 0.1s linear;
+    will-change: transform, filter;
+}
+
+.slide-container-transition {
+    transition: all 0.15s ease-out;
+    will-change: transform;
+}
+
+.opacity-transition {
+    transition: opacity var(--content-transition-duration) var(--easing), 
+                visibility var(--content-transition-duration) var(--easing);
+}
+
+.bg-transition {
+    transition: all var(--content-transition-duration) var(--easing);
+}
+
+.button-transition {
+    transition: all 0.3s var(--easing);
+}
+
+.carousel-list-transition {
+    transition: transform var(--slide-transition-duration) var(--easing);
+}
+
+/* Efeito de brilho suave no slide ativo */
+.slide-active .slide-overlay {
+    background: linear-gradient(
+        to bottom, 
+        rgba(0,0,0,0.2) 0%, 
+        rgba(0,0,0,0) 20%, 
+        rgba(0,0,0,0) 80%, 
+        rgba(0,0,0,0.2) 100%
+    );
+}
+
+/* Melhorias na tipografia */
+.slide-content h2 {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.slide-content p {
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}

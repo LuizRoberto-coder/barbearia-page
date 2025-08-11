@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BarberShop Elite - A Melhor Barbearia da Cidade</title>
+
+    <!-- Meta tags para SEO -->
+    <meta name="description" content="BarberShop Elite - A melhor barbearia da cidade com cortes modernos, ambiente sofisticado e profissionais experientes.">
+    <meta name="keywords" content="barbearia, corte de cabelo, barba, estilo masculino, cuidados masculinos">
+    <meta name="author" content="BarberShop Elite">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="global.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-black': '#000000',
+                        'primary-gray': '#A0A0A0',
+                        'primary-light': '#F8F8F8',
+                        'primary-bronze': '#C0C0C0',
+                        'primary-forest': '#808080',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'playfair': ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-out',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                        'fade-in-down': 'fadeInDown 0.8s ease-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'slide-in-left': 'slideInLeft 0.8s ease-out',
+                        'slide-in-right': 'slideInRight 0.8s ease-out',
+                        'bounce-slow': 'bounce 3s infinite',
+                        'pulse-slow': 'pulse 3s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'scale-in': 'scaleIn 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeInDown: {
+                            '0%': { opacity: '0', transform: 'translateY(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(50px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        slideInLeft: {
+                            '0%': { transform: 'translateX(-50px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        slideInRight: {
+                            '0%': { transform: 'translateX(50px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px #C0C0C0, 0 0 10px #C0C0C0, 0 0 15px #C0C0C0' },
+                            '100%': { boxShadow: '0 0 10px #C0C0C0, 0 0 20px #C0C0C0, 0 0 30px #C0C0C0' },
+                        },
+                        scaleIn: {
+                            '0%': { transform: 'scale(0.9)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-primary-black font-inter overflow-x-hidden">
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/5582996148084" target="_blank" rel="noopener noreferrer"
+        class="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-2xl transition-all duration-500 hover:scale-125 animate-bounce hover:animate-pulse"
+        aria-label="Contato via WhatsApp">
+        <i data-lucide="message-circle" class="w-6 h-6"></i>
+    </a>
+
+    <!-- Header -->
+    <header class="fixed top-0 w-full bg-primary-black/95 backdrop-blur-md z-40 border-b border-primary-bronze/30 transition-all duration-300">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3 animate-fade-in-left">
+                <div class="w-12 h-12 bg-gradient-to-br from-primary-bronze to-primary-forest rounded-full flex items-center justify-center shadow-lg animate-glow">
+                    <i data-lucide="scissors" class="w-7 h-7 text-primary-light"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-bold text-primary-light font-playfair">BarberShop</span>
+                    <span class="text-2xl font-bold text-primary-bronze ml-1 font-playfair">Elite</span>
+                </div>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-8 animate-fade-in-down">
+                <a href="#inicio" class="text-primary-light hover:text-primary-bronze transition-all duration-300 font-medium relative group">
+                    Início
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-bronze transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#servicos" class="text-primary-light hover:text-primary-bronze transition-all duration-300 font-medium relative group">
+                    Serviços
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-bronze transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#galeria" class="text-primary-light hover:text-primary-bronze transition-all duration-300 font-medium relative group">
+                    Galeria
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-bronze transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#contato" class="text-primary-light hover:text-primary-bronze transition-all duration-300 font-medium relative group">
+                    Contato
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-bronze transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </nav>
+
+            <button id="mobileMenuButton" class="md:hidden text-primary-light" aria-label="Abrir menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="pt-24 pb-20 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary-black via-primary-gray/20 to-primary-black"></div>
+        <div class="container mx-auto text-center relative z-10">
+            <div class="transform transition-all duration-1000 animate-fade-in-up">
+                <h1 class="text-5xl md:text-8xl font-bold mb-8 text-primary-light leading-tight font-playfair">
+                    ESTILO & <span class="bg-gradient-to-r from-primary-bronze to-primary-forest bg-clip-text text-transparent animate-pulse">TRADIÇÃO</span>
+                </h1>
+                <p class="text-lg md:text-2xl text-primary-gray mb-12 max-w-4xl mx-auto leading-relaxed">
+                    A melhor barbearia da cidade. Cortes modernos, ambiente sofisticado e profissionais experientes para
+                    cuidar do seu visual com excelência.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
+                    <a href="agendamento.html" class="animate-fade-in-up">
+                        <button class="bg-gradient-to-r from-primary-bronze to-primary-forest text-primary-light font-bold text-lg px-8 py-3 md:px-10 md:py-4 hover:from-primary-forest hover:to-primary-bronze transform hover:scale-110 transition-all duration-500 shadow-2xl hover:shadow-primary-bronze/50 animate-pulse-slow rounded-md flex items-center">
+                            <i data-lucide="calendar" class="mr-3 h-6 w-6"></i>
+                            Agendar Horário
+                        </button>
+                    </a>
+                    <a href="https://wa.me/5582996148084" target="_blank" rel="noopener noreferrer" class="animate-fade-in-up">
+                        <button class="border-2 border-primary-bronze text-primary-bronze hover:bg-primary-bronze hover:text-primary-light font-semibold text-lg px-8 py-3 md:px-10 md:py-4 transform hover:scale-105 transition-all duration-500 bg-transparent hover:shadow-lg rounded-md flex items-center">
+                            <i data-lucide="phone" class="mr-3 h-6 w-6"></i>
+                            (82) 99614-8084
+                        </button>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Stats - Hidden on Mobile -->
+            <div class="hidden md:grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
+                <div class="text-center transform hover:scale-110 transition-all duration-500 bg-primary-gray/10 p-8 rounded-2xl backdrop-blur-sm hover:bg-primary-gray/20 animate-fade-in-up">
+                    <div class="w-20 h-20 bg-gradient-to-br from-primary-bronze to-primary-forest rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg animate-float">
+                        <i data-lucide="users" class="w-10 h-10 text-primary-light"></i>
+                    </div>
+                    <h3 class="text-4xl font-bold text-primary-bronze mb-3 font-playfair">500+</h3>
+                    <p class="text-primary-gray text-lg">Clientes Satisfeitos</p>
+                </div>
+                <div class="text-center transform hover:scale-110 transition-all duration-500 bg-primary-gray/10 p-8 rounded-2xl backdrop-blur-sm hover:bg-primary-gray/20 animate-fade-in-up">
+                    <div class="w-20 h-20 bg-gradient-to-br from-primary-bronze to-primary-forest rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg animate-float">
+                        <i data-lucide="award" class="w-10 h-10 text-primary-light"></i>
+                    </div>
+                    <h3 class="text-4xl font-bold text-primary-bronze mb-3 font-playfair">5 Anos</h3>
+                    <p class="text-primary-gray text-lg">De Experiência</p>
+                </div>
+                <div class="text-center transform hover:scale-110 transition-all duration-500 bg-primary-gray/10 p-8 rounded-2xl backdrop-blur-sm hover:bg-primary-gray/20 animate-fade-in-up">
+                    <div class="w-20 h-20 bg-gradient-to-br from-primary-bronze to-primary-forest rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg animate-float">
+                        <i data-lucide="star" class="w-10 h-10 text-primary-light"></i>
+                    </div>
+                    <h3 class="text-4xl font-bold text-primary-bronze mb-3 font-playfair">4.9★</h3>
+                    <p class="text-primary-gray text-lg">Avaliação Google</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicos" class="py-16 px-4 bg-gradient-to-br from-primary-gray/5 to-primary-black">
+        <div class="container mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 text-primary-light font-playfair animate-fade-in-down">
+                Nossos <span class="text-primary-bronze">Serviços</span>
+            </h2>
+
+            <div class="relative overflow-hidden w-full h-full py-20">
+                <div class="relative mx-auto" style="width: 70vmin; height: 70vmin;" id="carousel-container">
+                    <ul class="absolute flex carousel-list-transition" style="margin: 0 -4vmin;" id="carousel-list">
+                        <!-- Slides serão inseridos aqui pelo JavaScript -->
+                    </ul>
+
+                    <div class="absolute flex justify-center w-full" style="top: calc(100% + 1rem);">
+                        <button id="prev-btn" class="w-12 h-12 flex items-center mx-2 justify-center bg-primary-light/20 hover:bg-primary-light/40 border-2 border-primary-bronze/30 rounded-full focus:outline-none hover:-translate-y-0.5 active:translate-y-0 button-transition rotate-180 hover:scale-110" title="Slide anterior">
+                            <svg class="text-primary-bronze w-6 h-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14"></path>
+                                <path d="m12 5 7 7-7 7"></path>
+                            </svg>
+                        </button>
+
+                        <button id="next-btn" class="w-12 h-12 flex items-center mx-2 justify-center bg-primary-light/20 hover:bg-primary-light/40 border-2 border-primary-bronze/30 rounded-full focus:outline-none hover:-translate-y-0.5 active:translate-y-0 button-transition hover:scale-110" title="Próximo slide">
+                            <svg class="text-primary-bronze w-6 h-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14"></path>
+                                <path d="m12 5 7 7-7 7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 md:py-20 px-4 bg-gradient-to-r from-primary-bronze to-primary-forest relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary-bronze/90 to-primary-forest/90"></div>
+        <div class="container mx-auto text-center relative z-10">
+            <h2 class="text-4xl md:text-6xl font-bold text-primary-light mb-6 md:mb-8 font-playfair animate-fade-in-up">
+                Pronto para um Novo Visual?
+            </h2>
+            <p class="text-lg md:text-xl text-primary-light/90 mb-8 md:mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in-up">
+                Agende seu horário agora e experimente o melhor atendimento da cidade com profissionais qualificados!
+            </p>
+            <a href="agendamento.html" class="animate-fade-in-up">
+                <button class="bg-primary-black text-primary-bronze font-bold text-lg md:text-xl px-8 py-4 md:px-12 md:py-6 hover:bg-primary-gray  transform hover:scale-110 transition-all duration-500 shadow-2xl hover:shadow-primary-light/25 animate-pulse-slow rounded-md flex items-center mx-auto">
+                    <i data-lucide="calendar" class="mr-3 h-6 w-6"></i>
+                    Agendar Agora
+                </button>
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact & Map Section -->
+    <section id="contato" class="py-16 md:py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-4xl md:text-6xl font-bold text-center mb-12 text-primary-light font-playfair animate-fade-in-up">
+                Contato & <span class="text-primary-bronze">Localização</span>
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto">
+                <div class="space-y-6 md:space-y-8 animate-slide-in-left">
+                    <h3 class="text-2xl md:text-3xl font-bold text-primary-light mb-6 md:mb-8 font-playfair">Informações</h3>
+                    <div class="space-y-4 md:space-y-6">
+                        <div class="flex items-center group hover:transform hover:scale-105 transition-all duration-300">
+                            <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-primary-bronze to-primary-forest rounded-full flex items-center justify-center mr-4 group-hover:shadow-lg group-hover:shadow-primary-bronze/25 transition-all duration-300">
+                                <i data-lucide="map-pin" class="w-5 h-5 md:w-6 md:h-6 text-primary-light"></i>
+                            </div>
+                            <div class="text-primary-gray text-base md:text-lg">Feira Grande, 123 - Centro, Alagoas - AL</div>
+                        </div>
+                        <div class="flex items-center group hover:transform hover:scale-105 transition-all duration-300">
+                            <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-primary-bronze to-primary-forest rounded-full flex items-center justify-center mr-4 group-hover:shadow-lg group-hover:shadow-primary-bronze/25 transition-all duration-300">
+                                <i data-lucide="phone" class="w-5 h-5 md:w-6 md:h-6 text-primary-light"></i>
+                            </div>
+                            <div class="text-primary-gray text-base md:text-lg">(82) 99614-8084</div>
+                        </div>
+                        <div class="flex items-center group hover:transform hover:scale-105 transition-all duration-300">
+                            <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-primary-bronze to-primary-forest rounded-full flex items-center justify-center mr-4 group-hover:shadow-lg group-hover:shadow-primary-bronze/25 transition-all duration-300">
+                                <i data-lucide="clock" class="w-5 h-5 md:w-6 md:h-6 text-primary-light"></i>
+                            </div>
+                            <div class="text-primary-gray text-base md:text-lg">
+                                <p>Segunda a Sexta: 8:00 - 18:00</p>
+                                <p>Sábado: 8:00 - 17:00</p>
+                                <p class="text-primary-bronze font-semibold">Domingo: Fechado</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Google Maps -->
+                <div class="rounded-2xl overflow-hidden shadow-2xl border-2 border-primary-bronze/20 hover:border-primary-bronze/50 transition-all duration-500 animate-slide-in-right">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.1975!2d-46.6333824!3d-23.5505199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0xd59f9431f2c9776a!2sS%C3%A9!5e0!3m2!1spt-BR!2sbr!4v1234567890"
+                        width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="filter grayscale hover:grayscale-0 transition-all duration-700 hover:scale-105"
+                        title="Localização da BarberShop Elite no mapa">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary-black py-12 px-4 border-t border-primary-bronze/20">
+        <div class="container mx-auto text-center">
+            <div class="flex items-center justify-center space-x-3 mb-6 animate-fade-in-up">
+                <div class="w-12 h-12 bg-gradient-to-br from-primary-bronze to-primary-forest rounded-full flex items-center justify-center shadow-lg animate-glow">
+                    <i data-lucide="scissors" class="w-6 h-6 text-primary-light"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-bold text-primary-light font-playfair">BarberShop</span>
+                    <span class="text-2xl font-bold text-primary-bronze ml-1 font-playfair">Elite</span>
+                </div>
+            </div>
+            <p class="text-primary-gray text-lg animate-fade-in-up">
+                © 2024 BarberShop Elite. Todos os direitos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Inicializar ícones Lucide
+        lucide.createIcons();
+        
+        // Menu mobile (simplificado - implementação completa deve estar no barbearia.js)
+        document.getElementById('mobileMenuButton').addEventListener('click', function() {
+            // Implementação do menu mobile aqui
+            console.log('Menu mobile clicado');
+        });
+    </script>
+    
+    <script src="barbearia.js"></script>
+</body>
+</html>

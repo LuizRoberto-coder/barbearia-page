@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento Online - BarberShop Elite</title>
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="global.css">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-black': '#000000',
+                        'primary-gray': '#A0A0A0', // Prata médio
+                        'primary-light': '#F8F8F8', // Branco
+                        'primary-bronze': '#C0C0C0', // Prata claro (para acentos)
+                        'primary-forest': '#808080', // Prata escuro (para gradientes)
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'playfair': ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-out',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                        'fade-in-down': 'fadeInDown 0.8s ease-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'slide-in-left': 'slideInLeft 0.8s ease-out',
+                        'slide-in-right': 'slideInRight 0.8s ease-out',
+                        'bounce-slow': 'bounce 3s infinite',
+                        'pulse-slow': 'pulse 3s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'scale-in': 'scaleIn 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeInDown: {
+                            '0%': { opacity: '0', transform: 'translateY(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(50px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        slideInLeft: {
+                            '0%': { transform: 'translateX(-50px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        slideInRight: {
+                            '0%': { transform: 'translateX(50px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px #C0C0C0, 0 0 10px #C0C0C0, 0 0 15px #C0C0C0' }, // Usando primary-bronze (prata)
+                            '100%': { boxShadow: '0 0 10px #C0C0C0, 0 0 20px #C0C0C0, 0 0 30px #C0C0C0' }, // Usando primary-bronze (prata)
+                        },
+                        scaleIn: {
+                            '0%': { transform: 'scale(0.9)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        },
+                    }
+                }
+            }
+        }
+
+    </script>
+</head>
+
+<body class="bg-primary-black font-inter min-h-screen overflow-x-hidden">
+
+    <!-- Header -->
+    <header class="bg-primary-black/95 backdrop-blur-md border-b border-[#C0C0C0]/30">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="index.html"
+                class="flex items-center space-x-3 text-primary-light hover:text-[#C0C0C0] transition-all duration-300 hover:scale-105">
+                <i data-lucide="arrow-left" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+                <span class="font-semibold text-sm sm:text-base">Voltar</span>
+            </a>
+            <div class="flex items-center space-x-3 animate-fade-in">
+                <div
+                    class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-[#C0C0C0] to-[#808080] rounded-full flex items-center justify-center animate-glow">
+                    <i data-lucide="scissors" class="w-4 h-4 sm:w-5 sm:h-5 text-primary-light"></i>
+                </div>
+                <div>
+                    <span class="text-lg sm:text-xl font-bold text-primary-light font-playfair">Agendamento</span>
+                    <span class="text-lg sm:text-xl font-bold text-[#C0C0C0] ml-1 font-playfair">Online</span>
+                </div>
+            </div>
+            <div class="w-16 sm:w-20"></div>
+        </div>
+    </header>
+    <div class="container mx-auto px-4 py-6 sm:py-8">
+        <div class="mb-8 sm:mb-12 animate-fade-in-down">
+            <div class="flex justify-center items-center space-x-2 sm:space-x-4 mb-4 sm:mb-6">
+                <div class="flex items-center">
+                    <div id="step1"
+                        class="w-8 h-8 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold transition-all duration-700 shadow-lg bg-gradient-to-br from-[#C0C0C0] to-[#808080] text-primary-light scale-110 animate-glow">
+                        1
+                    </div>
+                    <div id="line1"
+                        class="w-10 sm:w-16 h-2 mx-2 sm:mx-3 rounded-full transition-all duration-700 bg-[#A0A0A0]">
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <div id="step2"
+                        class="w-8 h-8 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold transition-all duration-700 shadow-lg bg-[#A0A0A0] text-primary-light/50">
+                        2
+                    </div>
+                    <div id="line2"
+                        class="w-10 sm:w-16 h-2 mx-2 sm:mx-3 rounded-full transition-all duration-700 bg-[#A0A0A0]">
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <div id="step3"
+                        class="w-8 h-8 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold transition-all duration-700 shadow-lg bg-[#A0A0A0] text-primary-light/50">
+                        3
+                    </div>
+                    <div id="line3"
+                        class="w-10 sm:w-16 h-2 mx-2 sm:mx-3 rounded-full transition-all duration-700 bg-[#A0A0A0]">
+                    </div>
+                </div>
+                <div id="step4"
+                    class="w-8 h-8 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold transition-all duration-700 shadow-lg bg-[#A0A0A0] text-primary-light/50">
+                    4
+                </div>
+            </div>
+            <div class="text-center">
+                <h3 id="stepTitle" class="text-xl sm:text-2xl font-bold text-primary-light mb-1 sm:mb-2 font-playfair">
+                    Escolha seu Serviço
+                </h3>
+                <p id="stepDescription" class="text-[#A0A0A0] text-sm sm:text-base">
+                    Etapa 1 de 4 - Selecione o serviço desejado
+                </p>
+            </div>
+        </div>
+        <!-- Main Card -->
+        <div
+            class="max-w-6xl mx-auto bg-gradient-to-br from-primary-light/5 to-[#A0A0A0]/10 border border-[#C0C0C0]/30 shadow-2xl backdrop-blur-sm animate-scale-in rounded-lg overflow-hidden">
+            <div class="p-4 sm:p-6 md:p-8">
+                <!-- Step 1: Service Selection -->
+                <div id="step1Content" class="step-content">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                        <div class="service-card cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-xl animate-fade-in-up border border-[#A0A0A0]/30 hover:border-[#C0C0C0]/50 bg-primary-black/20 rounded-lg"
+                            data-service="corte-tradicional" data-price="R$ 25" data-duration="30min">
+                            <div class="p-4 sm:p-6 text-center group">
+                                <div
+                                    class="text-3xl sm:text-4xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
+                                    ✂️</div>
+                                <h3
+                                    class="font-bold text-primary-light text-lg sm:text-xl mb-1 sm:mb-2 group-hover:text-[#C0C0C0] transition-colors duration-300">
+                                    Corte Tradicional</h3>
+                                <p class="text-[#C0C0C0] font-bold text-xl sm:text-2xl mb-1 sm:mb-2">R$ 25</p>
+                                <p class="text-[#A0A0A0] text-xs sm:text-sm mb-2 sm:mb-3">Corte clássico e elegante</p>
+                                <div class="flex items-center justify-center text-[#A0A0A0] text-xs sm:text-sm">
+                                    <i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 mr-1"></i>
+                                    <span>30min</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="service-card cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-xl animate-fade-in-up border border-[#A0A0A0]/30 hover:border-[#C0C0C0]/50 bg-primary-black/20 rounded-lg"
+                            data-service="corte-barba" data-price="R$ 40" data-duration="45min">
+                            <div class="p-4 sm:p-6 text-center group">
+                                <div
+                                    class="text-3xl sm:text-4xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
+                                    🪒</div>
+                                <h3
+                                    class="font-bold text-primary-light text-lg sm:text-xl mb-1 sm:mb-2 group-hover:text-[#C0C0C0] transition-colors duration-300">
+                                    Corte + Barba</h3>
+                                <p class="text-[#C0C0C0] font-bold text-xl sm:text-2xl mb-1 sm:mb-2">R$ 40</p>
+                                <p class="text-[#A0A0A0] text-xs sm:text-sm mb-2 sm:mb-3">Combo completo para o visual
+                                    perfeito</p>
+                                <div class="flex items-center justify-center text-[#A0A0A0] text-xs sm:text-sm">
+                                    <i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 mr-1"></i>
+                                    <span>45min</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="service-card cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-xl animate-fade-in-up border border-[#A0A0A0]/30 hover:border-[#C0C0C0]/50 bg-primary-black/20 rounded-lg"
+                            data-service="barba-completa" data-price="R$ 20" data-duration="25min">
+                            <div class="p-4 sm:p-6 text-center group">
+                                <div
+                                    class="text-3xl sm:text-4xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
+                                    🧔</div>
+                                <h3
+                                    class="font-bold text-primary-light text-lg sm:text-xl mb-1 sm:mb-2 group-hover:text-[#C0C0C0] transition-colors duration-300">
+                                    Barba Completa</h3>
+                                <p class="text-[#C0C0C0] font-bold text-xl sm:text-2xl mb-1 sm:mb-2">R$ 20</p>
+                                <p class="text-[#A0A0A0] text-xs sm:text-sm mb-2 sm:mb-3">Aparar e modelar a barba</p>
+                                <div class="flex items-center justify-center text-[#A0A0A0] text-xs sm:text-sm">
+                                    <i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 mr-1"></i>
+                                    <span>25min</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="service-card cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-xl animate-fade-in-up border border-[#A0A0A0]/30 hover:border-[#C0C0C0]/50 bg-primary-black/20 rounded-lg"
+                            data-service="corte-premium" data-price="R$ 35" data-duration="40min">
+                            <div class="p-4 sm:p-6 text-center group">
+                                <div
+                                    class="text-3xl sm:text-4xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
+                                    💎</div>
+                                <h3
+                                    class="font-bold text-primary-light text-lg sm:text-xl mb-1 sm:mb-2 group-hover:text-[#C0C0C0] transition-colors duration-300">
+                                    Corte Premium</h3>
+                                <p class="text-[#C0C0C0] font-bold text-xl sm:text-2xl mb-1 sm:mb-2">R$ 35</p>
+                                <p class="text-[#A0A0A0] text-xs sm:text-sm mb-2 sm:mb-3">Corte moderno com acabamento
+                                    especial</p>
+                                <div class="flex items-center justify-center text-[#A0A0A0] text-xs sm:text-sm">
+                                    <i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 mr-1"></i>
+                                    <span>40min</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="service-card cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-xl animate-fade-in-up border border-[#A0A0A0]/30 hover:border-[#C0C0C0]/50 bg-primary-black/20 rounded-lg"
+                            data-service="sobrancelha" data-price="R$ 15" data-duration="15min">
+                            <div class="p-4 sm:p-6 text-center group">
+                                <div
+                                    class="text-3xl sm:text-4xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
+                                    👁️</div>
+                                <h3
+                                    class="font-bold text-primary-light text-lg sm:text-xl mb-1 sm:mb-2 group-hover:text-[#C0C0C0] transition-colors duration-300">
+                                    Sobrancelha</h3>
+                                <p class="text-[#C0C0C0] font-bold text-xl sm:text-2xl mb-1 sm:mb-2">R$ 15</p>
+                                <p class="text-[#A0A0A0] text-xs sm:text-sm mb-2 sm:mb-3">Design e limpeza das
+                                    sobrancelhas</p>
+                                <div class="flex items-center justify-center text-[#A0A0A0] text-xs sm:text-sm">
+                                    <i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 mr-1"></i>
+                                    <span>15min</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="service-card cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-xl animate-fade-in-up border border-[#A0A0A0]/30 hover:border-[#C0C0C0]/50 bg-primary-black/20 rounded-lg"
+                            data-service="tratamento" data-price="R$ 30" data-duration="35min">
+                            <div class="p-4 sm:p-6 text-center group">
+                                <div
+                                    class="text-3xl sm:text-4xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
+                                    💆</div>
+                                <h3
+                                    class="font-bold text-primary-light text-lg sm:text-xl mb-1 sm:mb-2 group-hover:text-[#C0C0C0] transition-colors duration-300">
+                                    Tratamento Capilar</h3>
+                                <p class="text-[#C0C0C0] font-bold text-xl sm:text-2xl mb-1 sm:mb-2">R$ 30</p>
+                                <p class="text-[#A0A0A0] text-xs sm:text-sm mb-2 sm:mb-3">Hidratação e cuidados
+                                    especiais</p>
+                                <div class="flex items-center justify-center text-[#A0A0A0] text-xs sm:text-sm">
+                                    <i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 mr-1"></i>
+                                    <span>35min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Step 2: Barber Selection -->
+                <div id="step2Content" class="step-content hidden">
+                    <div class="grid grid-cols-1 gap-6 sm:gap-8 max-w-4xl mx-auto">
+                        <div class="barber-card cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-xl border border-[#A0A0A0]/30 hover:border-[#C0C0C0]/50 bg-primary-black/20 rounded-lg animate-slide-in-left"
+                            data-barber="carlos">
+                            <div class="p-6 sm:p-8 text-center group">
+                                <div
+                                    class="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-4 sm:mb-6 rounded-full overflow-hidden border-4 border-[#C0C0C0] shadow-lg group-hover:border-[#808080] transition-colors duration-500">
+                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face"
+                                        alt="Carlos Silva"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                </div>
+                                <h3
+                                    class="text-xl sm:text-2xl font-bold text-primary-light mb-2 sm:mb-3 group-hover:text-[#C0C0C0] transition-colors duration-300">
+                                    Carlos Silva</h3>
+                                <p class="text-[#C0C0C0] mb-2 sm:mb-3 text-sm sm:text-base">Especialista em cortes
+                                    clássicos</p>
+                                <div class="flex items-center justify-center mb-1 sm:mb-2">
+                                    <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 mr-1"></i>
+                                    <span class="text-primary-light font-semibold text-sm sm:text-base">4.9</span>
+                                </div>
+                                <p class="text-[#A0A0A0] text-sm sm:text-base">8 anos de experiência</p>
+                            </div>
+                        </div>
+                        <div class="barber-card cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-xl border border-[#A0A0A0]/30 hover:border-[#C0C0C0]/50 bg-primary-black/20 rounded-lg animate-slide-in-right"
+                            data-barber="joao">
+                            <div class="p-6 sm:p-8 text-center group">
+                                <div
+                                    class="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-4 sm:mb-6 rounded-full overflow-hidden border-4 border-[#C0C0C0] shadow-lg group-hover:border-[#808080] transition-colors duration-500">
+                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face"
+                                        alt="João Santos"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                </div>
+                                <h3
+                                    class="text-xl sm:text-2xl font-bold text-primary-light mb-2 sm:mb-3 group-hover:text-[#C0C0C0] transition-colors duration-300">
+                                    João Santos</h3>
+                                <p class="text-[#C0C0C0] mb-2 sm:mb-3 text-sm sm:text-base">Expert em barbas e bigodes
+                                </p>
+                                <div class="flex items-center justify-center mb-1 sm:mb-2">
+                                    <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 mr-1"></i>
+                                    <span class="text-primary-light font-semibold text-sm sm:text-base">4.8</span>
+                                </div>
+                                <p class="text-[#A0A0A0] text-sm sm:text-base">6 anos de experiência</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Step 3: Date and Time Selection -->
+                <div id="step3Content" class="step-content hidden">
+                    <div class="max-w-6xl mx-auto space-y-8 sm:space-y-12">
+                        <!-- Date Selection -->
+                        <div class="animate-fade-in-up">
+                            <h3
+                                class="text-xl sm:text-2xl font-bold text-primary-light mb-4 sm:mb-6 text-center font-playfair">
+                                Escolha a Data
+                            </h3>
+                            <div id="dateGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+                                <!-- Dates will be generated by JavaScript -->
+                            </div>
+                        </div>
+                        <!-- Time Selection -->
+                        <div id="timeSection" class="animate-fade-in-up hidden">
+                            <h3
+                                class="text-xl sm:text-2xl font-bold text-primary-light mb-4 sm:mb-6 text-center font-playfair">
+                                Escolha o Horário
+                            </h3>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+                                <button
+                                    class="time-slot h-14 sm:h-16 transition-all duration-500 hover:scale-105 animate-fade-in-up border border-[#A0A0A0]/30 text-primary-light hover:border-[#C0C0C0] hover:text-[#C0C0C0] bg-primary-black/20 rounded-md flex items-center justify-center text-sm sm:text-base"
+                                    data-time="08:00">
+                                    <i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2"></i>
+                                    08:00
+                                </button>
+                                <button
+                                    class="time-slot h-14 sm:h-16 transition-all duration-500 hover:scale-105 animate-fade-in-up border border-[#A0A0A0]/30 text-primary-light hover:border-[#C0C0C0] hover:text-[#C0C0C0] bg-primary-black/20 rounded-md flex items-center justify-center text-sm sm:text-base"
+                                    data-time="08:30">
+                                    <i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2"></i>
+                                    08:30
+                                </button>
+                                <button
+                                    class="time-slot h-14 sm:h-16 transition-all duration-500 hover:scale-105 animate-fade-in-up border border-[#A0A0A0]/30 text-primary-light hover:border-[#C0C0C0] hover:text-[#C0C0C0] bg-primary-black/20 rounded-md flex items-center justify-center text-sm sm:text-base"
+                                    data-time="09:00">
+                                    <i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2"></i>
+                                    09:00
+                                </button>
+                                <button
+                                    class="time-slot h-14 sm:h-16 transition-all duration-500 hover:scale-105 animate-fade-in-up border border-[#A0A0A0]/30 text-primary-light hover:border-[#C0C0C0] hover:text-[#C0C0C0] bg-primary-black/20 rounded-md flex items-center justify-center text-sm sm:text-base"
+                                    data-time="09:30">
+                                    <i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2"></i>
+                                    09:30
+                                </button>
+                                <button
+                                    class="time-slot h-14 sm:h-16 transition-all duration-500 hover:scale-105 animate-fade-in-up border border-[#A0A0A0]/30 text-primary-light hover:border-[#C0C0C0] hover:text-[#C0C0C0] bg-primary-black/20 rounded-md flex items-center justify-center text-sm sm:text-base"
+                                    data-time="10:00">
+                                    <i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2"></i>
+                                    10:00
+                                </button>
+                                <button
+                                    class="time-slot h-14 sm:h-16 transition-all duration-500 hover:scale-105 animate-fade-in-up border border-[#A0A0A0]/30 text-primary-light hover:border-[#C0C0C0] hover:text-[#C0C0C0] bg-primary-black/20 rounded-md flex items-center justify-center text-sm sm:text-base"
+                                    data-time="10:30">
+                                    <i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2"></i>
+                                    10:30
+                                </button>
+                                <button
+                                    class="time-slot h-14 sm:h-16 transition-all duration-500 hover:scale-105 animate-fade-in-up border border-[#A0A0A0]/30 text-primary-light hover:border-[#C0C0C0] hover:text-[#C0C0C0] bg-primary-black/20 rounded-md flex items-center justify-center text-sm sm:text-base"
+                                    data-time="11:00">
+                                    <i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2"></i>
+                                    11:00
+                                </button>
+                                <button
+                                    class="time-slot h-14 sm:h-16 transition-all duration-500 hover:scale-105 animate-fade-in-up border border-[#A0A0A0]/30 text-primary-light hover:border-[#C0C0C0] hover:text-[#C0C0C0] bg-primary-black/20 rounded-md flex items-center justify-center text-sm sm:text-base"
+                                    data-time="11:30">
+                                    <i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2"></i>
+                                    11:30
+                                </button>
+                                <button
+                                    class="time-slot h-14 sm:h-16 transition-all duration-500 hover:scale-105 animate-fade-in-up border border-[#A0A0A0]/30 text-primary-light hover:border-[#C0C0C0] hover:text-[#C0C0C0] bg-primary-black/20 rounded-md flex items-center justify-center text-sm sm:text-base"
+                                    data-time="14:00">
+                                    <i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2"></i>
+                                    14:00
+                                </button>
+                                <button
+                                    class="time-slot h-14 sm:h-16 transition-all duration-500 hover:scale-105 animate-fade-in-up border border-[#A0A0A0]/30 text-primary-light hover:border-[#C0C0C0] hover:text-[#C0C0C0] bg-primary-black/20 rounded-md flex items-center justify-center text-sm sm:text-base"
+                                    data-time="14:30">
+                                    <i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2"></i>
+                                    14:30
+                                </button>
+                                <button
+                                    class="time-slot h-14 sm:h-16 transition-all duration-500 hover:scale-105 animate-fade-in-up border border-[#A0A0A0]/30 text-primary-light hover:border-[#C0C0C0] hover:text-[#C0C0C0] bg-primary-black/20 rounded-md flex items-center justify-center text-sm sm:text-base"
+                                    data-time="15:00">
+                                    <i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2"></i>
+                                    15:00
+                                </button>
+                                <button
+                                    class="time-slot h-14 sm:h-16 transition-all duration-500 hover:scale-105 animate-fade-in-up border border-[#A0A0A0]/30 text-primary-light hover:border-[#C0C0C0] hover:text-[#C0C0C0] bg-primary-black/20 rounded-md flex items-center justify-center text-sm sm:text-base"
+                                    data-time="15:30">
+                                    <i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2"></i>
+                                    15:30
+                                </button>
+                                <button
+                                    class="time-slot h-14 sm:h-16 transition-all duration-500 hover:scale-105 animate-fade-in-up border border-[#A0A0A0]/30 text-primary-light hover:border-[#C0C0C0] hover:text-[#C0C0C0] bg-primary-black/20 rounded-md flex items-center justify-center text-sm sm:text-base"
+                                    data-time="16:00">
+                                    <i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2"></i>
+                                    16:00
+                                </button>
+                                <button
+                                    class="time-slot h-14 sm:h-16 transition-all duration-500 hover:scale-105 animate-fade-in-up border border-[#A0A0A0]/30 text-primary-light hover:border-[#C0C0C0] hover:text-[#C0C0C0] bg-primary-black/20 rounded-md flex items-center justify-center text-sm sm:text-base"
+                                    data-time="16:30">
+                                    <i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2"></i>
+                                    16:30
+                                </button>
+                                <button
+                                    class="time-slot h-14 sm:h-16 transition-all duration-500 hover:scale-105 animate-fade-in-up border border-[#A0A0A0]/30 text-primary-light hover:border-[#C0C0C0] hover:text-[#C0C0C0] bg-primary-black/20 rounded-md flex items-center justify-center text-sm sm:text-base"
+                                    data-time="17:00">
+                                    <i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2"></i>
+                                    17:00
+                                </button>
+                                <button
+                                    class="time-slot h-14 sm:h-16 transition-all duration-500 hover:scale-105 animate-fade-in-up border border-[#A0A0A0]/30 text-primary-light hover:border-[#C0C0C0] hover:text-[#C0C0C0] bg-primary-black/20 rounded-md flex items-center justify-center text-sm sm:text-base"
+                                    data-time="17:30">
+                                    <i data-lucide="clock" class="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2"></i>
+                                    17:30
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Step 4: Client Information -->
+                <div id="step4Content" class="step-content hidden">
+                    <div class="max-w-4xl mx-auto space-y-6 sm:space-y-8 animate-fade-in-up">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                            <div class="animate-slide-in-left">
+                                <label for="name"
+                                    class="text-primary-light text-base sm:text-lg font-semibold mb-1 sm:mb-2 block">
+                                    Nome Completo *
+                                </label>
+                                <input id="name" type="text"
+                                    class="w-full bg-primary-black/50 border border-[#A0A0A0]/30 text-primary-light h-10 sm:h-12 text-base sm:text-lg focus:border-[#C0C0C0] transition-all duration-300 hover:border-[#C0C0C0]/50 rounded-md px-3 sm:px-4"
+                                    placeholder="Seu nome completo">
+                            </div>
+                            <div class="animate-slide-in-right">
+                                <label for="phone"
+                                    class="text-primary-light text-base sm:text-lg font-semibold mb-1 sm:mb-2 block">
+                                    Telefone *
+                                </label>
+                                <input id="phone" type="tel"
+                                    class="w-full bg-primary-black/50 border border-[#A0A0A0]/30 text-primary-light h-10 sm:h-12 text-base sm:text-lg focus:border-[#C0C0C0] transition-all duration-300 hover:border-[#C0C0C0]/50 rounded-md px-3 sm:px-4"
+                                    placeholder="(11) 99999-9999">
+                            </div>
+                        </div>
+                        <div class="animate-fade-in-up">
+                            <label for="notes"
+                                class="text-primary-light text-base sm:text-lg font-semibold mb-1 sm:mb-2 block">
+                                Observações
+                            </label>
+                            <textarea id="notes" rows="3"
+                                class="w-full bg-primary-black/50 border border-[#A0A0A0]/30 text-primary-light text-base sm:text-lg focus:border-[#C0C0C0] transition-all duration-300 hover:border-[#C0C0C0]/50 rounded-md px-3 sm:px-4 py-2 sm:py-3"
+                                placeholder="Alguma observação especial..."></textarea>
+                        </div>
+                        <!-- Summary -->
+                        <div
+                            class="bg-gradient-to-br from-[#C0C0C0]/10 to-[#808080]/10 border border-[#C0C0C0]/30 animate-scale-in rounded-lg">
+                            <div class="p-4 sm:p-6">
+                                <h4 class="text-xl sm:text-2xl text-[#C0C0C0] text-center font-playfair mb-4 sm:mb-6">
+                                    Resumo do Agendamento
+                                </h4>
+                                <div class="space-y-3 sm:space-y-4">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                                        <div class="space-y-2 sm:space-y-3">
+                                            <div class="flex justify-between">
+                                                <span class="text-[#A0A0A0] text-sm sm:text-base">Serviço:</span>
+                                                <span id="summaryService"
+                                                    class="text-primary-light font-semibold text-sm sm:text-base">-</span>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <span class="text-[#A0A0A0] text-sm sm:text-base">Barbeiro:</span>
+                                                <span id="summaryBarber"
+                                                    class="text-primary-light font-semibold text-sm sm:text-base">-</span>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <span class="text-[#A0A0A0] text-sm sm:text-base">Preço:</span>
+                                                <span id="summaryPrice"
+                                                    class="text-[#C0C0C0] font-bold text-lg sm:text-xl">-</span>
+                                            </div>
+                                        </div>
+                                        <div class="space-y-2 sm:space-y-3">
+                                            <div class="flex justify-between">
+                                                <span class="text-[#A0A0A0] text-sm sm:text-base">Data:</span>
+                                                <span id="summaryDate"
+                                                    class="text-primary-light font-semibold text-sm sm:text-base">-</span>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <span class="text-[#A0A0A0] text-sm sm:text-base">Horário:</span>
+                                                <span id="summaryTime"
+                                                    class="text-primary-light font-semibold text-sm sm:text-base">-</span>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <span class="text-[#A0A0A0] text-sm sm:text-base">Duração:</span>
+                                                <span id="summaryDuration"
+                                                    class="text-primary-light font-semibold text-sm sm:text-base">-</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Barra de navegação fixa -->
+        </div>
+    </div>
+    </div>
+
+    <!-- Barra de navegação fixa -->
+    <!-- Dentro da sua div principal (antes do fechamento) -->
+    <div class="floating-buttons-container">
+        <div class="flex justify-between px-4 sm:px-6">
+            <button id="prevBtn"
+                class="border border-[#A0A0A0]/30 text-primary-light hover:border-[#C0C0C0] hover:text-[#C0C0C0] disabled:opacity-50 bg-primary-black/20 px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base transition-all duration-300 hover:scale-105 rounded-md"
+                disabled>
+                Anterior
+            </button>
+            <button id="nextBtn"
+                class="bg-gradient-to-r from-[#C0C0C0] to-[#808080] text-primary-light hover:from-[#808080] hover:to-[#C0C0C0] disabled:opacity-50 px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg rounded-md"
+                disabled>
+                Próximo
+            </button>
+        </div>
+    </div>
+
+    <div id="toast"
+        class="fixed top-4 right-4 z-50 bg-green-600 text-white px-4 sm:px-6 py-3 sm:py-4 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 text-sm sm:text-base">
+        <div class="flex items-center">
+            <i data-lucide="check-circle" class="w-4 h-4 sm:w-5 sm:h-5 mr-2"></i>
+            <span id="toastMessage">Agendamento confirmado!</span>
+        </div>
+    </div>
+
+    <script src="agendamento.js"></script>
+    
+</body>
+
+</html>
